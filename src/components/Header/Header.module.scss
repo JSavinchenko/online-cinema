@@ -1,0 +1,118 @@
+$font-stack: Helvetica, sans-serif;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px;
+  border-bottom: 1px solid #5a5a7a;
+  color: #fff;
+  font: 100% $font-stack;
+
+  .searchSection {
+    h3 {
+      margin-bottom: 10px;
+      font-size: 24px;
+      font-weight: 300;
+    }
+
+    .searchInput {
+      width: 100%;
+      padding: 8px 15px 8px 10px;
+      border: 1px solid #5a5a7a;
+      border-radius: 5px;
+      background-color: rgb(26, 0, 26);
+      color: #fff;
+      font-size: 16px;
+
+      &::placeholder {
+        color: rgb(192, 192, 192);
+      }
+    }
+  }
+
+  .filterSection {
+    .dropdowns {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+
+      .dropdown {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #5a5a7a;
+        border-radius: 5px;
+        background-color: rgb(26, 0, 26);
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+
+        -webkit-appearance: none; // Safari и Chrome
+        -moz-appearance: none; // Firefox
+        appearance: none;
+        background-image: none;
+
+        &:focus {
+          outline: none;
+          border-color: white;
+        }
+      }
+
+      input.dropdown {
+        width: 200px;
+      }
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+
+      .addButton {
+        padding: 8px 10px;
+        background-color: rgb(26, 0, 26);
+        border: 1px solid #5a5a7a;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+
+      .resetButton {
+        padding: 8px 10px;
+        background-color: rgb(26, 0, 26);
+        border: 1px solid #5a5a7a;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #a71d2a;
+        }
+      }
+    }
+  }
+  @media (max-width: 500px) {
+    .filterSection {
+      .dropdowns,
+      .actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .dropdown,
+        .addButton,
+        .resetButton {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
