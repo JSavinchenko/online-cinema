@@ -1,13 +1,24 @@
 $font-stack: Helvetica, sans-serif;
 
 .movies-container {
-  h2 {
-    margin-inline: 20px 0;
-    margin-block: 20px 0;
-    text-align: left;
-    font: 100% $font-stack;
-    font-size: 24px;
-    color: white;
+  .tab-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    .tab {
+      padding: 10px 20px;
+      border: none;
+      background: none;
+      color: rgb(150, 150, 150);
+      cursor: pointer;
+      font-size: 24px;
+
+      &.active {
+        color: white;
+        text-decoration: underline;
+      }
+    }
   }
 
   .movies-grid {

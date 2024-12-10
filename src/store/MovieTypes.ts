@@ -13,6 +13,7 @@ export interface Movie {
 
 export interface MovieState {
   movies: Movie[];
+  favorites: Movie[];
   error: string | null;
   searchQuery: string;
   filters: {

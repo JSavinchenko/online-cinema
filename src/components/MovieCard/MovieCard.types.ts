@@ -9,4 +9,6 @@ export interface MovieCardProps {
   dateOfCreation: string;
   dateOfUpdate: string;
   image: string;
+  isFavorite?: boolean;
+  onToggleFavorite: (id: number) => void;
 }

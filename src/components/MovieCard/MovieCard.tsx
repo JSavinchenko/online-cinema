@@ -16,6 +16,8 @@ export const MovieCard = ({
   dateOfCreation,
   dateOfUpdate,
   image,
+  isFavorite,
+  onToggleFavorite,
 }: MovieCardProps) => {
   const dispatch = useDispatch();
 
@@ -56,6 +58,12 @@ export const MovieCard = ({
             className={styles.editButton}
           >
             ✎
+          </button>
+          <button
+            className={`${styles.favorite} ${isFavorite ? styles.active : ''}`}
+            onClick={() => onToggleFavorite(id)}
+          >
+            ♥
           </button>
         </div>
         <div className={styles.info}>

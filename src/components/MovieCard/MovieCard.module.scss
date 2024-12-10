@@ -66,6 +66,17 @@ $font-stack: Helvetica, sans-serif;
         color: white;
       }
     }
+
+    .favorite {
+      background: none;
+      border: none;
+      color: rgb(150, 150, 150);
+      cursor: pointer;
+
+      &.active {
+        color: tomato;
+      }
+    }
   }
 
   &:hover .actions {

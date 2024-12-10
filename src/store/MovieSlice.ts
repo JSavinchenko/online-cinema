@@ -4,6 +4,7 @@ import {initialMovies} from './InitialMovies';
 
 const initialState: MovieState = {
   movies: initialMovies,
+  favorites: [],
   error: null,
   searchQuery: '',
   filters: {
@@ -35,9 +36,13 @@ const movieSlice = createSlice({
     },
     deleteMovie: (state, action: PayloadAction<number>) => {
       // Удаление фильма
-      state.movies = state.movies.filter(
-        (movie) => movie.id !== action.payload,
-      );
+      const movieId = action.payload;
+
+      // из общего списка
+      state.movies = state.movies.filter((movie) => movie.id !== movieId);
+
+      //из избранного списка
+      state.favorites = state.favorites.filter((movie) => movie.id !== movieId);
     },
     updateMovie: (state, action: PayloadAction<Movie>) => {
       // Редактирование фильма
@@ -78,6 +83,22 @@ const movieSlice = createSlice({
       // Обновление значения в поисковом поле
       state.searchQuery = action.payload;
     },
+    toggleFavorite: (state, action: PayloadAction<number>) => {
+      // добавление/удаление в избранное
+      const movieId = action.payload;
+      const isFavorite = state.favorites.some((movie) => movie.id === movieId);
+
+      if (isFavorite) {
+        state.favorites = state.favorites.filter(
+          (movie) => movie.id !== movieId,
+        );
+      } else {
+        const movie = state.movies.find((movie) => movie.id === movieId);
+        if (movie) {
+          state.favorites.push(movie);
+        }
+      }
+    },
   },
 });
 
@@ -88,5 +109,6 @@ export const {
   setFilters,
   clearFilters,
   setSearchQuery,
+  toggleFavorite,
 } = movieSlice.actions;
 export default movieSlice.reducer;
