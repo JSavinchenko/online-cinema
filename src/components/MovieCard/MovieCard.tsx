@@ -21,19 +21,20 @@ export const MovieCard = ({
 }: MovieCardProps) => {
   const dispatch = useDispatch();
 
+  // Локальные состояния для отображения наведения мыши и открытия модального окна
   const [isHovered, setIsHovered] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const handleDelete = () => {
-    dispatch(deleteMovie(id));
+    dispatch(deleteMovie(id)); // Удаление фильма по id через редакс
   };
 
   const handleEdit = () => {
-    setIsEditModalOpen(true);
+    setIsEditModalOpen(true); // Открытие модального окна для редактирования
   };
 
   const closeModal = () => {
-    setIsEditModalOpen(false);
+    setIsEditModalOpen(false); // Закрытие модального окна
   };
 
   return (

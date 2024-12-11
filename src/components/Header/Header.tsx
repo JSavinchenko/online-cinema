@@ -8,23 +8,31 @@ import {useState} from 'react';
 export const Header = () => {
   const dispatch = useDispatch();
 
+  // Получение фильтров и поискового запроса и
   const filters = useSelector((state: RootState) => state.movies.filters);
   const searchQuery = useSelector(
     (state: RootState) => state.movies.searchQuery,
   );
+
+  // Локальное состояние для управления открытием/закрытием модалки
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
+
+  // Проверка наличия активных фильтров
   const hasFilters = Object.values(filters).some((filter) => filter !== null);
 
+  // Функция для сброса всех фильтров и поискового запроса
   const handleClearFilters = () => {
     dispatch(clearFilters());
     dispatch(setSearchQuery(''));
   };
 
+  // Обработчик изменения года, который обновляет фильтр
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const year = e.target.value ? +e.target.value : null;
-    dispatch(setFilters({year}));
+    const year = e.target.value ? +e.target.value : null; // Преобразование введенного значения в число или null
+    dispatch(setFilters({year})); // Установка фильтра по году
   };
 
   return (

@@ -7,7 +7,11 @@ import {toggleFavorite} from '../../store/MovieSlice';
 
 export const Movies = () => {
   const dispatch = useDispatch();
+
+  // Локальное состояние для управления активной вкладкой
   const [activeTab, setActiveTab] = useState<'movies' | 'favorites'>('movies');
+
+  // Получение данных из Redux-хранилища
   const movies = useSelector((state: RootState) => state.movies.movies);
   const favorites = useSelector((state: RootState) => state.movies.favorites);
   const filters = useSelector((state: RootState) => state.movies.filters);
@@ -15,10 +19,12 @@ export const Movies = () => {
     (state: RootState) => state.movies.searchQuery,
   );
 
+  // Функция обработки добавления/удаления фильма в избранное
   const handleToggleFavorite = (id: number) => {
     dispatch(toggleFavorite(id));
   };
 
+  // Фильтрация фильмов на основе активной вкладки, фильтров и поискового запроса
   const filteredMovies = (activeTab === 'movies' ? movies : favorites)
     .filter((movie) => {
       const {genre, year, dateFilterType, dateOfCreation, dateOfUpdate} =
@@ -49,7 +55,7 @@ export const Movies = () => {
       }
 
       return true;
-    })
+    }) // Сортировка фильмов по дате создания или обновления
     .sort((a, b) => {
       const {dateFilterType} = filters;
 
@@ -68,7 +74,7 @@ export const Movies = () => {
       }
 
       return 0;
-    })
+    }) // Поиск по заголовку, режиссеру, актерам или аннотации
     .filter((movie) => {
       if (!searchQuery || searchQuery.length < 3) return true;
       const query = searchQuery.toLowerCase();

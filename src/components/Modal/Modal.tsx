@@ -5,10 +5,11 @@ import {addMovie, updateMovie} from '../../store/MovieSlice';
 import {ModalProps} from './Modal.types';
 
 export const Modal = ({isOpen, onClose, mode, movieData}: ModalProps) => {
-  if (!isOpen) return null;
+  if (!isOpen) return null; // Если модальное закрыто, то ничего не рендерим
 
   const dispatch = useDispatch();
 
+  // Состояние для отслеживания ошибок в форме
   const [errors, setErrors] = useState<{
     title?: boolean;
     genre?: boolean;
@@ -16,6 +17,7 @@ export const Modal = ({isOpen, onClose, mode, movieData}: ModalProps) => {
     actors?: boolean;
   }>({});
 
+  // Состояние для данных формы
   const [formData, setFormData] = useState(
     movieData || {
       title: '',
@@ -30,6 +32,7 @@ export const Modal = ({isOpen, onClose, mode, movieData}: ModalProps) => {
     },
   );
 
+  // Обработчик изменения полей формы
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -40,9 +43,11 @@ export const Modal = ({isOpen, onClose, mode, movieData}: ModalProps) => {
     }));
   };
 
+  // Обработчик отправки формы
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Проверяем обязательные поля
     const validationErrors: {
       title?: boolean;
       genre?: boolean;
@@ -50,7 +55,6 @@ export const Modal = ({isOpen, onClose, mode, movieData}: ModalProps) => {
       actors?: boolean;
     } = {};
 
-    // Проверяем обязательные поля
     if (!formData.title) validationErrors.title = true;
     if (!formData.genre) validationErrors.genre = true;
     if (!formData.director) validationErrors.director = true;
@@ -78,6 +82,7 @@ export const Modal = ({isOpen, onClose, mode, movieData}: ModalProps) => {
           : formData.actors,
     };
 
+    // Диспатч для добавления или обновления фильма
     if (mode === 'add') {
       dispatch(
         addMovie({
